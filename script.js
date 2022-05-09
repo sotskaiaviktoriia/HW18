@@ -31,7 +31,7 @@ form.onsubmit = (event) => {
   checkBox.classList.add("form-check-input");
   li.prepend(checkBox);
 
-  list.onchange = (event) => {
+  li.onchange = (event) => {
     const isCheckBox = event.target.classList.contains("form-check-input");
 
     if (isCheckBox) {
