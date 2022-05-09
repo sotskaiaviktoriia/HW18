@@ -31,21 +31,25 @@ form.onsubmit = (event) => {
   checkBox.classList.add("form-check-input");
   li.prepend(checkBox);
 
-  checkBox.onchange = ({ target: { checked } }) => {
-    checkBox.disabled = checked;
-    buttonDelete.disabled = checked;
-    buttonDelete.className = "button_disabled";
-    li.className = "item_done";
-  };
+  list.onchange = (event) => {
+    const isCheckBox = event.target.classList.contains("form-check-input");
 
-  text_input.oninput = () => {
-    const isErrorField = text_input.classList.contains("error");
-
-    if (isErrorField) {
-      text_input.classList.remove("error");
-      errorMessage.innerHTML = "";
+    if (isCheckBox) {
+      checkBox.disabled = true;
+      buttonDelete.disabled = true;
+      buttonDelete.className = "button_disabled";
+      li.className = "item_done";
     }
   };
+};
+
+text_input.oninput = () => {
+  const isErrorField = text_input.classList.contains("error");
+
+  if (isErrorField) {
+    text_input.classList.remove("error");
+    errorMessage.innerHTML = "";
+  }
 };
 
 list.addEventListener("click", (event) => {
