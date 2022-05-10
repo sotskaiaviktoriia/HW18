@@ -5,19 +5,19 @@
 const form = document.querySelector("form");
 const errorMessage = document.querySelector(".error_message");
 const list = document.getElementById("list");
-const { text_input, button_add } = form;
+const { text_input: textInput, button_add: buttonSubmit } = form;
 
 form.onsubmit = (event) => {
   event.preventDefault();
-  if (text_input.value.trim().length === 0) {
-    text_input.classList.add("error");
+  if (textInput.value.trim().length === 0) {
+    textInput.classList.add("error");
     errorMessage.innerHTML = "Please enter text!";
     return;
   }
 
   const li = document.createElement("li");
   li.classList.add("list_item");
-  li.innerHTML = text_input.value;
+  li.innerHTML = textInput.value;
   list.append(li);
   form.reset();
 
@@ -31,23 +31,26 @@ form.onsubmit = (event) => {
   checkBox.classList.add("form-check-input");
   li.prepend(checkBox);
 
-  li.onchange = (event) => {
+  list.onchange = (event) => {
     const isCheckBox = event.target.classList.contains("form-check-input");
 
+    const rowValue = event.target.closest(".list_item");
+    const rowButton = rowValue.querySelector(".remove_button");
+
     if (isCheckBox) {
-      checkBox.disabled = true;
-      buttonDelete.disabled = true;
-      buttonDelete.className = "button_disabled";
-      li.className = "item_done";
+      event.target.disabled = true;
+      rowValue.className = "item_done";
+      rowButton.className = "button_disabled";
+      rowButton.disabled = true;
     }
   };
 };
 
-text_input.oninput = () => {
-  const isErrorField = text_input.classList.contains("error");
+textInput.oninput = () => {
+  const isErrorField = textInput.classList.contains("error");
 
   if (isErrorField) {
-    text_input.classList.remove("error");
+    textInput.classList.remove("error");
     errorMessage.innerHTML = "";
   }
 };
