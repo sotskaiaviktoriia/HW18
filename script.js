@@ -30,20 +30,20 @@ form.onsubmit = (event) => {
   checkBox.type = "checkbox";
   checkBox.classList.add("form-check-input");
   li.prepend(checkBox);
+};
 
-  list.onchange = (event) => {
-    const isCheckBox = event.target.classList.contains("form-check-input");
+list.onchange = (event) => {
+  const isCheckBox = event.target.classList.contains("form-check-input");
 
-    const rowValue = event.target.closest(".list_item");
-    const rowButton = rowValue.querySelector(".remove_button");
+  const rowValue = event.target.closest(".list_item");
+  const rowButton = rowValue.querySelector(".remove_button");
 
-    if (isCheckBox) {
-      event.target.disabled = true;
-      rowValue.className = "item_done";
-      rowButton.className = "button_disabled";
-      rowButton.disabled = true;
-    }
-  };
+  if (isCheckBox) {
+    event.target.disabled = true;
+    rowValue.className = "item_done";
+    rowButton.className = "button_disabled";
+    rowButton.disabled = true;
+  }
 };
 
 textInput.oninput = () => {
